@@ -1,0 +1,273 @@
+import { Court, Booking } from '../types/tennis';
+import { getTodayDateString, formatDateToISO } from '../utils/dateUtils';
+
+export const INITIAL_COURTS: Court[] = [
+  {
+    id: 'court-1',
+    name: 'Quadra 1 - Saibro Central',
+    surface: 'saibro',
+    hourlyPrice: 85,
+    isIndoor: false,
+    hasLighting: true,
+    imageUrl: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1000&q=80',
+    description: 'Quadra oficial de saibro europeu com drenagem rápida e iluminação LED profissional para jogos noturnos.',
+    isActive: true,
+    openHour: 6,
+    closeHour: 23,
+  },
+  {
+    id: 'court-2',
+    name: 'Quadra 2 - Grand Slam Coberta',
+    surface: 'coberta',
+    hourlyPrice: 110,
+    isIndoor: true,
+    hasLighting: true,
+    imageUrl: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=1000&q=80',
+    description: 'Piso rápido amortecido em ambiente 100% coberto. Perfeita para dias de chuva ou sol intenso.',
+    isActive: true,
+    openHour: 7,
+    closeHour: 23,
+  },
+  {
+    id: 'court-3',
+    name: 'Quadra 3 - Rápida Master (Hard Court)',
+    surface: 'rapida',
+    hourlyPrice: 75,
+    isIndoor: false,
+    hasLighting: true,
+    imageUrl: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1000&q=80',
+    description: 'Piso asfáltico acrílico de alta performance, padrão US Open, com ótima tração e quique regular.',
+    isActive: true,
+    openHour: 6,
+    closeHour: 22,
+  },
+  {
+    id: 'court-4',
+    name: 'Quadra 4 - Grama Sintética Club',
+    surface: 'grama',
+    hourlyPrice: 90,
+    isIndoor: false,
+    hasLighting: false,
+    imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80',
+    description: 'Grama sintética com amortecimento para menor impacto nas articulações, perfeita para duplas e lazer.',
+    isActive: true,
+    openHour: 7,
+    closeHour: 18,
+  },
+];
+
+export function generateInitialBookings(): Booking[] {
+  const today = getTodayDateString();
+  const d = new Date();
+  
+  // Yesterday
+  const yesterdayDate = new Date(d);
+  yesterdayDate.setDate(d.getDate() - 1);
+  const yesterday = formatDateToISO(yesterdayDate);
+
+  // Tomorrow
+  const tomorrowDate = new Date(d);
+  tomorrowDate.setDate(d.getDate() + 1);
+  const tomorrow = formatDateToISO(tomorrowDate);
+
+  // Day after tomorrow
+  const inTwoDaysDate = new Date(d);
+  inTwoDaysDate.setDate(d.getDate() + 2);
+  const inTwoDays = formatDateToISO(inTwoDaysDate);
+
+  return [
+    // Today bookings
+    {
+      id: 'b-101',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'Carlos Eduardo Silva',
+      clientPhone: '(11) 98765-4321',
+      date: today,
+      startHour: 8,
+      endHour: 9,
+      totalPrice: 85,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      notes: 'Jogo de simples amistoso',
+    },
+    {
+      id: 'b-102',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'Carlos Eduardo Silva', // Has 2 bookings today!
+      clientPhone: '(11) 98765-4321',
+      date: today,
+      startHour: 17,
+      endHour: 18,
+      totalPrice: 85,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 86400000).toISOString(),
+      notes: 'Segunda hora de treino no dia (limite máximo)',
+    },
+    {
+      id: 'b-103',
+      courtId: 'court-2',
+      courtName: 'Quadra 2 - Grand Slam Coberta',
+      clientName: 'Fernanda Lima Castro',
+      clientPhone: '(21) 99123-5566',
+      date: today,
+      startHour: 9,
+      endHour: 10,
+      totalPrice: 110,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+    },
+    {
+      id: 'b-104',
+      courtId: 'court-2',
+      courtName: 'Quadra 2 - Grand Slam Coberta',
+      clientName: 'Rodrigo Medeiros',
+      clientPhone: '(31) 98456-7890',
+      date: today,
+      startHour: 19,
+      endHour: 20,
+      totalPrice: 110,
+      status: 'confirmed',
+      paymentStatus: 'pending',
+      createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    },
+    {
+      id: 'b-105',
+      courtId: 'court-3',
+      courtName: 'Quadra 3 - Rápida Master (Hard Court)',
+      clientName: 'Mariana Duarte Costa',
+      clientPhone: '(41) 97111-2233',
+      date: today,
+      startHour: 14,
+      endHour: 15,
+      totalPrice: 75,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 3600000 * 18).toISOString(),
+    },
+    {
+      id: 'b-106',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'Clube AceCourt (Torneio)',
+      clientPhone: '(11) 90000-0000',
+      date: today,
+      startHour: 10,
+      endHour: 11,
+      totalPrice: 0,
+      status: 'blocked',
+      paymentStatus: 'paid',
+      createdAt: new Date().toISOString(),
+      blockedReason: 'Manutenção de rotina e irrigação do saibro',
+    },
+
+    // Tomorrow bookings
+    {
+      id: 'b-201',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'Lucas Alencar Prado',
+      clientPhone: '(11) 99344-1234',
+      date: tomorrow,
+      startHour: 7,
+      endHour: 8,
+      totalPrice: 85,
+      status: 'confirmed',
+      paymentStatus: 'pending',
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: 'b-202',
+      courtId: 'court-2',
+      courtName: 'Quadra 2 - Grand Slam Coberta',
+      clientName: 'Beatriz Vasconcelos',
+      clientPhone: '(11) 98222-3344',
+      date: tomorrow,
+      startHour: 18,
+      endHour: 19,
+      totalPrice: 110,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date().toISOString(),
+    },
+
+    // In two days
+    {
+      id: 'b-301',
+      courtId: 'court-3',
+      courtName: 'Quadra 3 - Rápida Master (Hard Court)',
+      clientName: 'Thiago Nogueira',
+      clientPhone: '(19) 98877-6655',
+      date: inTwoDays,
+      startHour: 16,
+      endHour: 17,
+      totalPrice: 75,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date().toISOString(),
+    },
+
+    // Yesterday (completed for reporting)
+    {
+      id: 'b-001',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'Guilherme Sampaio',
+      clientPhone: '(11) 97654-3210',
+      date: yesterday,
+      startHour: 9,
+      endHour: 10,
+      totalPrice: 85,
+      status: 'completed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+    },
+    {
+      id: 'b-002',
+      courtId: 'court-2',
+      courtName: 'Quadra 2 - Grand Slam Coberta',
+      clientName: 'Fernanda Lima Castro',
+      clientPhone: '(21) 99123-5566',
+      date: yesterday,
+      startHour: 15,
+      endHour: 16,
+      totalPrice: 110,
+      status: 'completed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+    },
+    {
+      id: 'b-003',
+      courtId: 'court-3',
+      courtName: 'Quadra 3 - Rápida Master (Hard Court)',
+      clientName: 'Rafael Guimarães',
+      clientPhone: '(11) 98111-9988',
+      date: yesterday,
+      startHour: 18,
+      endHour: 19,
+      totalPrice: 75,
+      status: 'completed',
+      paymentStatus: 'paid',
+      createdAt: new Date(Date.now() - 86400000 * 4).toISOString(),
+    },
+    {
+      id: 'b-004',
+      courtId: 'court-1',
+      courtName: 'Quadra 1 - Saibro Central',
+      clientName: 'André Zanetti',
+      clientPhone: '(11) 99777-6655',
+      date: yesterday,
+      startHour: 20,
+      endHour: 21,
+      totalPrice: 85,
+      status: 'cancelled',
+      paymentStatus: 'pending',
+      createdAt: new Date(Date.now() - 86400000 * 4).toISOString(),
+      notes: 'Cancelado pelo cliente com antecedência',
+    },
+  ];
+}
