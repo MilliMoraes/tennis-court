@@ -1,11 +1,11 @@
-# Sistema de Agendamento de Quadras de Tênis (AceCourt)
+# Sistema de agendamento de quadras de tênis 
 
-Repositório da aplicação desenvolvida para a disciplina de Gerência de Projetos de Software (UFOP).
+Repositório para a disciplina de Gerência de Projetos de Software (UFOP).
 
 ## Equipe
 - Brenda Mel
 - Clarissa Cesar
-- Geovanna Paulina
+- Geovanna Peixoto
 - Kelly Barbosa
 - Milliany Rodrigues
 
