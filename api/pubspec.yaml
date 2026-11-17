@@ -1,0 +1,5 @@
+name: acecourt_api
+environment:
+  sdk: ^3.9.0
+dependencies:
+  postgres: ^3.6.0
